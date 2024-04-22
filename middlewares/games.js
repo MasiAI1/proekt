@@ -9,7 +9,7 @@ const getAllGames = async (req,res, next) =>{
         })
         return
     }
-    res.games = games
+    req.games = games
     next()
 }
 
@@ -34,13 +34,14 @@ const updateGamesArray = async (req, res, next) => {
             link: req.body.link,
             description: req.body.description
         }
+
         req.games = [...req.games, req.updateObject]
         next()
     } else {
         res.status(400)
         res.end({status:"error", message: "Игра с таким именем уже есть."});
-        return
     }
+    return
 }
 
 const updateGamesFile = async (req, res, next) => {
